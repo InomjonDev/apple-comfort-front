@@ -1,0 +1,6 @@
+export { default as Airpods } from './catalog-icons/airpods.svg'
+export { default as AppleTv } from './catalog-icons/apple-tv.svg'
+export { default as IMac } from './catalog-icons/imac.svg'
+export { default as IPad } from './catalog-icons/ipad.svg'
+export { default as IPhone } from './catalog-icons/iphone.svg'
+export { default as IWatch } from './catalog-icons/iwatch.svg'
