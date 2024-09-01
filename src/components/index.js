@@ -1,4 +1,5 @@
 export { default as Catalog } from './catalog/Catelog'
+export { default as Empty } from './empty/Empty'
 export { default as Navbar } from './navbar/Navbar'
 export { default as ProductWrapper } from './product-wrapper/ProductWrapper'
 export { default as Product } from './product/Product'
