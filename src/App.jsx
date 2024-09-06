@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { Navbar } from './components'
+import { Footer, Navbar } from './components'
 import { Cart, Favorites, Home, NotFound } from './routers/'
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
 				<Route path='/favorites' element={<Favorites />} />
 				<Route path='/cart' element={<Cart />} />
 			</Routes>
+
+			<Footer />
 		</div>
 	)
 }

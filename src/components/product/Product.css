@@ -78,6 +78,11 @@
 	color: #333333;
 }
 
+.product__item-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .product__item-desc {
 	font-size: 14px;
 	color: #666666;

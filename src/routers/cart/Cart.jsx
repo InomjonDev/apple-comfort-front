@@ -10,22 +10,23 @@ const Cart = () => {
 	const { cart } = useSelector(state => state)
 
 	return (
-		<div className='cart'>
+		<div className='cart container'>
 			{cart?.length === 0 ? (
 				<Empty empty_img={CartImg} />
 			) : (
-				<ul className='cart-items'>
+				<ul className='cart__items'>
 					{cart?.map(item => (
-						<li key={item._id} className='cart-item'>
+						<li key={item._id} className='cart__item'>
 							<img
 								src={item.image}
 								alt={item.title}
-								className='cart-item-image'
+								width={250}
+								className='cart__item-image'
 							/>
-							<div className='cart-item-info'>
-								<h3 className='cart-item-title'>{item.title}</h3>
-								<p className='cart-item-desc'>{item.desc}</p>
-								<div className='cart-item-quantity'>
+							<div className='cart__item-info'>
+								<h3 className='cart__item-title'>{item.title}</h3>
+								{/* <p className='cart-item-desc'>{item.desc}</p> */}
+								<div className='cart__item-quantity'>
 									<button onClick={() => handleQuantityChange(item._id, -1)}>
 										-
 									</button>
