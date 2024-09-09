@@ -1,12 +1,16 @@
 import { Catalog, ProductWrapper } from '../../components/'
 
-import { productItems } from '../../static/product-item'
+import useGetProducts from '../../hooks/useGetProducts'
 
 function Home() {
+	const { data, loading, error } = useGetProducts()
+
+	console.log(data)
+
 	return (
 		<div>
 			<Catalog />
-			<ProductWrapper data={productItems} />
+			<ProductWrapper data={data} />
 			{/* <Product /> */}
 		</div>
 	)

@@ -21,7 +21,7 @@ function Product({ data }) {
 		<div className='product container'>
 			<div className='product__wrapper'>
 				{data?.map(item => (
-					<div className='product__item' key={item._id}>
+					<div className='product__item' key={item.id}>
 						<div className='product__item-img'>
 							<Link to={`/product/${item._id}`} state={{ item }}>
 								<img src={item.image[0]} alt={item.title} width={320} />
