@@ -7,10 +7,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 50px;
-	position: fixed;
-	bottom: 0;
-	left: 0;
 }
 
 .footer-content {
@@ -33,6 +29,7 @@
 
 .center-section > span {
 	font-size: 28px;
+	font-weight: bold;
 }
 
 .right-section {

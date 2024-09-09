@@ -7,12 +7,10 @@ const Footer = () => {
 		<footer className='footer'>
 			<div className='footer-content'>
 				<div className='left-section'>
-					<p>©2024 UZB TECH SOLUTION</p>
+					<p>©2024 Vodiy Web</p>
 				</div>
 				<div className='center-section'>
-					<span>
-						<i>Apple Comfort</i>
-					</span>
+					<span>AppleComfort</span>
 				</div>
 				<div className='right-section'>
 					<Send className='social-icon' />
