@@ -1,16 +1,10 @@
-import {
-	Contact,
-	Home,
-	LucideHeart,
-	LucideShoppingBag,
-	MapPinned,
-	X,
-} from 'lucide-react'
+import { X } from 'lucide-react'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { Link } from 'react-router-dom'
 
+import { sidebarItems } from '../../static/sidebar-items'
 import './Sidebar.css'
 
 function Sidebar({ show, setShow }) {
@@ -31,36 +25,14 @@ function Sidebar({ show, setShow }) {
 					<X />
 				</button>
 				<ul className='sidebar__list'>
-					<li className='sidebar__item'>
-						<Link to='/'>
-							<Home size={28} />
-							<span>Asosiy Sahifa</span>
-						</Link>
-					</li>
-					<li className='sidebar__item'>
-						<Link to='/address'>
-							<MapPinned size={28} />
-							<span>Filiallar</span>
-						</Link>
-					</li>
-					<li className='sidebar__item'>
-						<Link to={'/contacts'}>
-							<Contact size={28} />
-							<span>Kontaktlar</span>
-						</Link>
-					</li>
-					<li className='sidebar__item'>
-						<Link to={'/cart'}>
-							<LucideShoppingBag size={28} />
-							<span>Savat</span>
-						</Link>
-					</li>
-					<li className='sidebar__item'>
-						<Link to={'/favorites'}>
-							<LucideHeart size={28} />
-							<span>Sevimlilar</span>
-						</Link>
-					</li>
+					{sidebarItems?.map(item => (
+						<li className='sidebar__item' key={item.id}>
+							<Link to={item.to}>
+								<item.icon size={28} />
+								<span>{item.text}</span>
+							</Link>
+						</li>
+					))}
 				</ul>
 			</div>
 		</>
