@@ -10,7 +10,6 @@ import './Sidebar.css'
 function Sidebar({ show, setShow }) {
 	const location = useLocation()
 
-	// Close sidebar on route change
 	useEffect(() => {
 		setShow(false)
 	}, [location.pathname, setShow])

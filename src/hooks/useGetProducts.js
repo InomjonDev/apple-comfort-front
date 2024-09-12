@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { db } from '../server'
+import { db } from '../firebase'
 
 const useGetProducts = () => {
 	const [data, setData] = useState([])
