@@ -1,11 +1,15 @@
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
-import { auth } from '../../firebase/index'
+import { auth } from '../../firebase'
+import { getItem } from '../../utils/store.utils'
 
 const ProtectedRoute = ({ element }) => {
-	const [user] = useAuthState(auth)
+	const userFromStorage = getItem('user')
+	const currentUser = auth.currentUser
 
-	return user ? element : <Navigate to='/login' />
+	const isAuthenticated =
+		userFromStorage && currentUser && userFromStorage.uid === currentUser.uid
+
+	return isAuthenticated ? element : <Navigate to='/login' />
 }
 
 export default ProtectedRoute

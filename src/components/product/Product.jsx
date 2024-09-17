@@ -6,25 +6,36 @@ import { Link } from 'react-router-dom'
 
 import { useActions } from '../../hooks/useActions'
 
-import { isFavorite } from '../../utils/favorites.utils'
+import useGetProducts from '../../hooks/useGetProducts'
 
-import 'number-brm'
+import { isFavorite } from '../../utils/favorites.utils'
 
 import './Product.css'
 
-function Product({ data }) {
-	const { favorites, cart } = useSelector(state => state)
-	const { toggleFavorites, addToCart, decrementCart, removeFromCart } =
-		useActions()
+function Product() {
+	const { favorites } = useSelector(state => state)
+	const { toggleFavorites, addToCart } = useActions()
+	const { data, loading, error } = useGetProducts()
+
+	if (loading) return <p>Loading products...</p>
+	if (error) return <p>Error loading products: {error.message}</p>
+
+	const formatPrice = price => {
+		const numericPrice = typeof price === 'string' ? parseFloat(price) : price
+		return new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+		}).format(numericPrice)
+	}
 
 	return (
 		<div className='product container'>
 			<div className='product__wrapper'>
-				{data?.map(item => (
+				{data.map(item => (
 					<div className='product__item' key={item.id}>
 						<div className='product__item-img'>
 							<Link to={`/product/${item._id}`} state={{ item }}>
-								<img src={item.image[0]} alt={item.title} width={320} />
+								<img src={item.imageUrls[0]} alt={item.title} width={320} />
 							</Link>
 							<button
 								className='product__item-heart'
@@ -44,7 +55,7 @@ function Product({ data }) {
 							</span>
 							<span className='product__item-desc'>{item.desc}</span>
 							<span className='product__item-price'>
-								{item.price?.brm()} so'm
+								{formatPrice(item.price)}
 							</span>
 							<button
 								className='product__item-btn'

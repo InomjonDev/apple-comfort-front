@@ -12,9 +12,11 @@ import {
 function App() {
 	const { pathname } = useLocation()
 
+	const showNavbarAndFooter = !['/login', '/admin'].includes(pathname)
+
 	return (
 		<div>
-			{pathname === '/login' ? null : <Navbar />}
+			{showNavbarAndFooter && <Navbar />}
 
 			<Routes>
 				<Route path='/login' element={<Login />} />
@@ -25,7 +27,7 @@ function App() {
 				<Route path='/admin' element={<ProtectedRoute element={<Admin />} />} />
 			</Routes>
 
-			{pathname === '/login' ? null : <Footer />}
+			{showNavbarAndFooter && <Footer />}
 		</div>
 	)
 }
