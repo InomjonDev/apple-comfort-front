@@ -1,10 +1,11 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { Footer, Login, Navbar } from './components'
+import { Footer, Navbar } from './components'
 import {
 	Admin,
 	Cart,
 	Favorites,
 	Home,
+	Login,
 	NotFound,
 	ProtectedRoute,
 } from './routers/'
@@ -15,19 +16,25 @@ function App() {
 	const showNavbarAndFooter = !['/login', '/admin'].includes(pathname)
 
 	return (
-		<div>
+		<div className='app'>
 			{showNavbarAndFooter && <Navbar />}
 
-			<Routes>
-				<Route path='/login' element={<Login />} />
-				<Route path='/' element={<Home />} />
-				<Route path='/*' element={<NotFound />} />
-				<Route path='/favorites' element={<Favorites />} />
-				<Route path='/cart' element={<Cart />} />
-				<Route path='/admin' element={<ProtectedRoute element={<Admin />} />} />
-			</Routes>
+			<div className='app__content'>
+				<Routes>
+					<Route path='/login' element={<Login />} />
+					<Route path='/' element={<Home />} />
+					<Route path='/*' element={<NotFound />} />
+					<Route path='/favorites' element={<Favorites />} />
+					<Route path='/cart' element={<Cart />} />
+					<Route
+						path='/admin'
+						element={<ProtectedRoute element={<Admin />} />}
+					/>
+					<Route path='/login' element={<Login />} />
+				</Routes>
+			</div>
 
-			{showNavbarAndFooter && <Footer />}
+			{showNavbarAndFooter && <Footer className='app__footer' />}
 		</div>
 	)
 }

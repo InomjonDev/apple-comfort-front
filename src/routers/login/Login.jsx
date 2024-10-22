@@ -1,7 +1,8 @@
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { LucideHome } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { auth } from '../../firebase/index'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase/'
 import { setItem } from '../../utils/store.utils'
 import './Login.css'
 
@@ -16,7 +17,6 @@ function Login() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		// Listen for changes in authentication state
 		const unsubscribe = onAuthStateChanged(auth, currentUser => {
 			if (currentUser) {
 				setItem('user', currentUser)
@@ -41,6 +41,9 @@ function Login() {
 
 	return (
 		<div className='login'>
+			<Link to={'/'} className='login__link'>
+				<LucideHome /> Home
+			</Link>
 			<form className='form' onSubmit={login}>
 				<input
 					type='email'
