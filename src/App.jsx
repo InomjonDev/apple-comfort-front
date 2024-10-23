@@ -8,6 +8,7 @@ import {
 	Login,
 	NotFound,
 	ProtectedRoute,
+	SingleRoute,
 } from './routers/'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 						element={<ProtectedRoute element={<Admin />} />}
 					/>
 					<Route path='/login' element={<Login />} />
+					<Route path='/product/:id' element={<SingleRoute />} />
 				</Routes>
 			</div>
 
