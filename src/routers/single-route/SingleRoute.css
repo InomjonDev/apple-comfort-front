@@ -1,0 +1,134 @@
+.single-route {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.single-route__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	width: 100%;
+}
+
+.single-route__item {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+}
+
+.single-route__item-img {
+	width: 450px;
+	/* width: 100%; */
+}
+
+.single-route__item-img > img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.single-route__item-options {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 15px;
+	gap: 20px;
+}
+
+.single-route__item-options-img {
+	width: 90px;
+	height: 90px;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: 10px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.single-route__item-options-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.single-route__item-options-img:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.single-route__item-body {
+	text-align: left;
+	margin-left: 20px;
+}
+
+.single-route__item-title {
+	margin: 10px 0;
+	font-size: 46px;
+	font-weight: normal;
+}
+
+.single-route__item-description {
+	margin: 10px 0;
+	font-size: 1.1rem;
+	color: #555;
+	font-weight: normal;
+	max-width: 650px;
+}
+
+.single-route__item-price {
+	margin: 5px 0;
+	font-size: 28px;
+	color: #333;
+}
+
+.single-route__item-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 15px;
+}
+
+.single-route__button {
+	width: 100%;
+	height: 42px;
+	padding: 10px 20px;
+	border: none;
+	background-color: #333333;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	font-size: 1rem;
+	font-weight: bold;
+	transition: background-color 0.3s;
+}
+
+.single-route__button:hover {
+	background-color: #555;
+}
+
+@media (max-width: 600px) {
+	.single-route__wrapper {
+		flex-direction: column;
+	}
+
+	.single-route__item {
+		flex-direction: column;
+	}
+
+	.single-route__item-body {
+		margin-left: 0;
+		text-align: center;
+	}
+
+	.single-route__item-options {
+		flex-direction: row;
+		overflow-x: auto;
+	}
+}
