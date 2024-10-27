@@ -8,18 +8,19 @@ const favoritesSlice = createSlice({
 	initialState,
 	reducers: {
 		toggleFavorites: (state, { payload: product }) => {
-			const isExists = state.some(p => p._id === product._id)
-			let updatedFavorites
+			const productExists = state.some(p => p.id === product.id)
 
-			if (isExists) {
-				updatedFavorites = state.filter(item => item._id !== product._id)
+			if (productExists) {
+				// Remove the product if it exists in the favorites array
+				const updatedFavorites = state.filter(p => p.id !== product.id)
+				localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+				return updatedFavorites
 			} else {
-				updatedFavorites = [...state, product]
+				// Add the product to the favorites array
+				const updatedFavorites = [...state, product]
+				localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+				return updatedFavorites
 			}
-
-			localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-
-			return updatedFavorites
 		},
 	},
 })

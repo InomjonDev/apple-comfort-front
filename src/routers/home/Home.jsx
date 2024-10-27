@@ -5,12 +5,10 @@ import useGetProducts from '../../hooks/useGetProducts'
 function Home() {
 	const { data, loading, error } = useGetProducts()
 
-	console.log(data)
-
 	return (
 		<div>
 			<Catalog />
-			<ProductWrapper data={data} />
+			<ProductWrapper data={data} loading={loading} error={error} />
 			{/* <Product /> */}
 		</div>
 	)

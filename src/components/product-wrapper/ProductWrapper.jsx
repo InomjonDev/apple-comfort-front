@@ -2,10 +2,10 @@ import { Product } from '../'
 
 import './ProductWrapper.css'
 
-function ProductWrapper({ data }) {
+function ProductWrapper({ data, loading, error }) {
 	return (
 		<>
-			<Product data={data} />
+			<Product data={data} loading={loading} error={error} />
 		</>
 	)
 }

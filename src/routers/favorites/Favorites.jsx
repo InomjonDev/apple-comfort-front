@@ -7,7 +7,7 @@ import FavoritesImg from '../../assets/empty/favorites.png'
 import './Favorites.css'
 
 function Favorites() {
-	const { favorites } = useSelector(state => state)
+	const favorites = useSelector(state => state.favorites)
 
 	return (
 		<div className='container favorites'>

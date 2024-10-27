@@ -1,16 +1,15 @@
-import { Heart, LucideShoppingCart } from 'lucide-react' // Assuming you're using lucide-icons
+import { Heart, LucideShoppingCart } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { useActions } from '../../hooks/useActions'
-import useGetProducts from '../../hooks/useGetProducts'
 
+import React from 'react'
 import './Product.css'
 
-function Product() {
-	const { favorites } = useSelector(state => state)
+function Product({ data, loading, error }) {
+	const favorites = useSelector(state => state.favorites)
 	const { toggleFavorites, addToCart } = useActions()
-	const { data, loading, error } = useGetProducts()
 
 	const formatPrice = price => {
 		const numericPrice = typeof price === 'string' ? parseFloat(price) : price
@@ -18,10 +17,6 @@ function Product() {
 			style: 'currency',
 			currency: 'USD',
 		}).format(numericPrice)
-	}
-
-	const isFavorite = (favorites, productId) => {
-		return favorites.some(favorite => favorite._id === productId)
 	}
 
 	return (
@@ -35,17 +30,21 @@ function Product() {
 					data.map(item => (
 						<div className='product__item' key={item.id}>
 							<div className='product__item-img'>
-								<Link to={`/product/${item.id}`} state={{ item }}>
+								<Link to={`/product/${item._id}`} state={{ item }}>
 									<img src={item.imageUrls[0]} alt={item.title} width={320} />
 								</Link>
-								<button
-									className='product__item-heart'
-									onClick={() => toggleFavorites(item)}
-								>
-									<Heart
-										color={isFavorite(favorites, item._id) ? '#f00' : '#ccc'}
-										fill={isFavorite(favorites, item._id) ? '#f00' : 'none'}
-									/>
+								<button className='product__item-heart'>
+									{favorites.some(p => p.id === item.id) ? (
+										<Heart
+											onClick={() => {
+												toggleFavorites(item)
+											}}
+											fill='#f00'
+											color='#f00'
+										/>
+									) : (
+										<Heart onClick={() => toggleFavorites(item)} />
+									)}
 								</button>
 							</div>
 							<div className='product__item-body'>
