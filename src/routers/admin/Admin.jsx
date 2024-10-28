@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { uploadImagesAndCreateProduct } from '../../utils/upload-image.utils'
 import AdminSidebar from './admin-sidebar/AdminSidebar'
 import './Admin.css'
@@ -54,7 +54,7 @@ function Admin() {
 			<div className='admin-content'>
 				<form className='product-form' onSubmit={handleSubmit}>
 					<label>
-						Product Name:
+						Mahsulot nomi:
 						<input
 							type='text'
 							name='title'
@@ -64,7 +64,7 @@ function Admin() {
 						/>
 					</label>
 					<label>
-						Price:
+						Narxi:
 						<input
 							type='number'
 							name='price'
@@ -74,7 +74,7 @@ function Admin() {
 						/>
 					</label>
 					<label>
-						Description:
+						Tavsifi:
 						<textarea
 							name='desc'
 							value={product.desc}
@@ -83,7 +83,7 @@ function Admin() {
 						/>
 					</label>
 					<label>
-						Category:
+						Kategoriya:
 						<input
 							type='text'
 							name='category'
@@ -93,17 +93,7 @@ function Admin() {
 						/>
 					</label>
 					<label>
-						Quantity:
-						<input
-							type='number'
-							name='quantity'
-							value={product.quantity}
-							onChange={handleChange}
-							required
-						/>
-					</label>
-					<label>
-						Images:
+						Rasmlar:
 						<input
 							type='file'
 							onChange={handleImageChange}
@@ -113,7 +103,7 @@ function Admin() {
 						/>
 					</label>
 					<button type='submit' className='submit-button' disabled={loading}>
-						{loading ? 'Saving...' : 'Add Product'}
+						{loading ? 'Saving...' : "Maxsulot qo'shish"}
 					</button>
 				</form>
 			</div>
