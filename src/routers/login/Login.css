@@ -45,6 +45,7 @@
 
 .form__input:focus {
 	border-color: #1e90ff;
+	outline: #1e90ff;
 }
 
 .form__button {
