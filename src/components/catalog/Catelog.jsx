@@ -1,12 +1,17 @@
+// Catalog.js
 import { catalogItems } from '../../static/catalog-items'
 import './Catalog.css'
 
-function Catalog() {
+function Catalog({ onSelectCategory }) {
 	return (
 		<div className='catalog'>
 			<ul className='catalog__list'>
 				{catalogItems?.map(item => (
-					<li className='catalog__item' key={item._id}>
+					<li
+						className='catalog__item'
+						key={item._id}
+						onClick={() => onSelectCategory(item.catalog_id)} // вызываем onSelectCategory
+					>
 						<a href={`#${item.catalog_id}`}>
 							<img
 								src={item.icon}

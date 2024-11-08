@@ -30,7 +30,7 @@ function Product({ data, loading, error }) {
 					data.map(item => (
 						<div className='product__item' key={item.id}>
 							<div className='product__item-img'>
-								<Link to={`/product/${item._id}`} state={{ item }}>
+								<Link to={`/product/${item.id}`} state={{ item }}>
 									<img src={item.imageUrls[0]} alt={item.title} width={320} />
 								</Link>
 								<button className='product__item-heart'>
