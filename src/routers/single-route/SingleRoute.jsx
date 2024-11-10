@@ -1,8 +1,17 @@
-import { Heart, ShoppingCart } from 'lucide-react'
+import {
+	Heart,
+	LucideArrowLeft,
+	LucideArrowRight,
+	ShoppingCart,
+} from 'lucide-react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useActions } from '../../hooks/useActions'
+import {
+	handleNextImage,
+	handlePreviousImage,
+} from '../../utils/single-route.utils'
 import './SingleRoute.css'
 
 function SingleRoute() {
@@ -11,7 +20,19 @@ function SingleRoute() {
 	const { favorites } = useSelector(state => state)
 	const { toggleFavorites, addToCart } = useActions()
 
-	const [currentImage, setCurrentImage] = useState(item.imageUrls[0])
+	const [currentIndex, setCurrentIndex] = useState(0)
+
+	const nextImage = () => {
+		setCurrentIndex(prevIndex =>
+			handleNextImage(prevIndex, item.imageUrls.length)
+		)
+	}
+
+	const previousImage = () => {
+		setCurrentIndex(prevIndex =>
+			handlePreviousImage(prevIndex, item.imageUrls.length)
+		)
+	}
 
 	return (
 		<div className='single-route container'>
@@ -19,17 +40,31 @@ function SingleRoute() {
 				<div className='single-route__item'>
 					<div className='single-route__item-images'>
 						<div className='single-route__item-img'>
+							<button
+								className='single-route__item-slider-button single-route__item-slider-button-left'
+								onClick={previousImage}
+							>
+								<LucideArrowLeft />
+							</button>
 							<img
-								src={currentImage}
+								src={item.imageUrls[currentIndex]}
 								alt={item.title}
 								className='single-route__item-img-main'
 							/>
+							<button
+								className='single-route__item-slider-button single-route__item-slider-button-right'
+								onClick={nextImage}
+							>
+								<LucideArrowRight />
+							</button>
 							<div className='single-route__item-options'>
 								{item.imageUrls.map((img, index) => (
 									<div
-										className='single-route__item-options-img'
+										className={`single-route__item-options-img ${
+											index === currentIndex ? 'active' : ''
+										}`}
 										key={index}
-										onClick={() => setCurrentImage(img)}
+										onClick={() => setCurrentIndex(index)}
 									>
 										<img src={img} alt={`option-image-${index}`} />
 									</div>
