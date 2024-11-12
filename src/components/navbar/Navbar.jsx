@@ -12,7 +12,8 @@ import './Navbar.css'
 
 function Navbar() {
 	const [show, setShow] = useState(false)
-	const { favorites, cart } = useSelector(state => state)
+	const { favorites } = useSelector(state => state)
+	const cart = useSelector(state => state.cart.value)
 
 	document.body.style.overflow = show ? 'hidden' : 'auto'
 

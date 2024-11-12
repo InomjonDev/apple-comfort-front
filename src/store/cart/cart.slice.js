@@ -1,48 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const storedFavorites = localStorage.getItem('cart')
-const initialState = storedFavorites ? JSON.parse(storedFavorites) : []
+const initialState = {
+	value: JSON.parse(localStorage.getItem('cart')) || [],
+}
 
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addToCart: (state, { payload }) => {
-			const index = state.findIndex(item => item._id === payload._id)
-			let updatedCart
-
+		addToCart: (state, actions) => {
+			let index = state.value.findIndex(i => i.id === actions.payload.id)
 			if (index < 0) {
-				updatedCart = [...state, { ...payload, quantity: 1 }]
+				state.value = [...state.value, { ...actions.payload, quantity: 1 }]
 			} else {
-				updatedCart = state.map((item, inx) =>
+				state.value = state.value.map((item, inx) =>
 					inx === index ? { ...item, quantity: item.quantity + 1 } : item
 				)
 			}
-
-			localStorage.setItem('cart', JSON.stringify(updatedCart))
-			return updatedCart
+			localStorage.setItem('cart', JSON.stringify(state.value))
 		},
 
-		removeFromCart: (state, { payload: id }) => {
-			const updatedCart = state.filter(item => item._id !== id)
+		removeFromCart: (state, { payload }) => {
+			const updatedCart = state.filter(item => item._id !== payload)
+
 			localStorage.setItem('cart', JSON.stringify(updatedCart))
 			return updatedCart
 		},
 
 		decrementCart: (state, { payload }) => {
 			const index = state.findIndex(item => item._id === payload._id)
-			let updatedCart = state
 
-			if (index >= 0) {
-				updatedCart = state.map((item, inx) =>
-					inx === index ? { ...item, quantity: item.quantity - 1 } : item
-				)
-
-				updatedCart = updatedCart.filter(item => item.quantity > 0)
+			if (index >= 0 && state[index].quantity > 1) {
+				state[index].quantity -= 1
+			} else if (index >= 0) {
+				state.splice(index, 1)
 			}
 
-			localStorage.setItem('cart', JSON.stringify(updatedCart))
-			return updatedCart
+			localStorage.setItem('cart', JSON.stringify(state))
 		},
 	},
 })

@@ -1,44 +1,69 @@
 import { useSelector } from 'react-redux'
 
-import { Empty } from '../../components'
-
-import CartImg from '../../assets/empty/cart.png'
-
+import { Minus, Plus, Trash } from 'lucide-react'
+import { useActions } from '../../hooks/useActions'
+import { formatPrice } from '../../utils/products.utils'
 import './Cart.css'
 
 const Cart = () => {
-	const { cart } = useSelector(state => state)
+	const cart = useSelector(state => state.cart.value)
+	const { addToCart, decrementCart, removeFromCart } = useActions()
+
+	console.log(cart)
 
 	return (
 		<div className='cart container'>
 			{cart?.length === 0 ? (
 				<Empty empty_img={CartImg} />
 			) : (
-				<ul className='cart__items'>
-					{cart?.map(item => (
-						<li key={item._id} className='cart__item'>
-							<img
-								src={item.image}
-								alt={item.title}
-								width={250}
-								className='cart__item-image'
-							/>
-							<div className='cart__item-info'>
-								<h3 className='cart__item-title'>{item.title}</h3>
-								{/* <p className='cart-item-desc'>{item.desc}</p> */}
-								<div className='cart__item-quantity'>
-									<button onClick={() => handleQuantityChange(item._id, -1)}>
-										-
-									</button>
-									<span>{item.quantity}</span>
-									<button onClick={() => handleQuantityChange(item._id, 1)}>
-										+
-									</button>
-								</div>
-							</div>
-						</li>
-					))}
-				</ul>
+				<div className='cart__wrapper'>
+					<div className='cart__wrapper-top'>
+						<span>Savatcha</span>
+						<button>
+							Olib Tashlash <Trash />
+						</button>
+					</div>
+					<div className='cart__wrapper-body'>
+						<ul className='cart__wrapper-list'>
+							{cart?.map(item => (
+								<li className='cart__wrapper-list-item' key={item.id}>
+									<div className='cart__wrapper-list-item-img'>
+										<img
+											src={item.imageUrls[0]}
+											alt={item.title}
+											width={90}
+											height={90}
+										/>
+									</div>
+									<div className='cart__wrapper-list-item-body'>
+										<span>{item.title}</span>
+										<span>{item.desc}</span>
+									</div>
+									<div className='cart__wrapper-list-item-actions'>
+										<div className='cart__wrapper-list-item-quantity'>
+											<button onClick={() => decrementCart(item)}>
+												<Minus />
+											</button>
+											<p>{item.quantity}</p>
+											<button onClick={() => addToCart(item)}>
+												<Plus />
+											</button>
+										</div>
+										<button
+											className='cart__wrapper-list-item-remove'
+											onClick={() => removeFromCart(item.id)}
+										>
+											<Trash /> Olib tashlash
+										</button>
+									</div>
+									<div className='cart__wrapper-list-item-price'>
+										<span>{formatPrice(item.price)}</span>
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
 			)}
 		</div>
 	)
