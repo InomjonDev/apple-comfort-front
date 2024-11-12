@@ -1,5 +1,5 @@
-// Catalog.js
 import { catalogItems } from '../../static/catalog-items'
+
 import './Catalog.css'
 
 function Catalog({ onSelectCategory }) {
@@ -10,7 +10,7 @@ function Catalog({ onSelectCategory }) {
 					<li
 						className='catalog__item'
 						key={item._id}
-						onClick={() => onSelectCategory(item.catalog_id)} // вызываем onSelectCategory
+						onClick={() => onSelectCategory(item.catalog_id)}
 					>
 						<a href={`#${item.catalog_id}`}>
 							<img

@@ -1,4 +1,3 @@
-// Home.js
 import { useState } from 'react'
 import { Catalog, ProductWrapper } from '../../components/'
 import useGetProducts from '../../hooks/useGetProducts'
