@@ -11,7 +11,6 @@ const favoritesSlice = createSlice({
 			const productExists = state.some(p => p.id === product.id)
 
 			if (productExists) {
-				// Remove the product if it exists in the favorites array
 				const updatedFavorites = state.filter(p => p.id !== product.id)
 				localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
 				return updatedFavorites

@@ -6,9 +6,18 @@ function Home() {
 	const { data, loading, error } = useGetProducts()
 	const [selectedCategory, setSelectedCategory] = useState('all')
 
+	const handleSelectCategory = category => {
+		setSelectedCategory(prevCategory =>
+			prevCategory === category ? 'all' : category
+		)
+	}
+
 	return (
 		<div>
-			<Catalog onSelectCategory={setSelectedCategory} />
+			<Catalog
+				onSelectCategory={handleSelectCategory}
+				selectedCategory={selectedCategory}
+			/>
 			<ProductWrapper
 				data={data}
 				loading={loading}

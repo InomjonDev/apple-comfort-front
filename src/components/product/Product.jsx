@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { useActions } from '../../hooks/useActions'
 
-import React from 'react'
 import './Product.css'
 
 function Product({ data, loading, error }) {
@@ -18,6 +17,8 @@ function Product({ data, loading, error }) {
 			currency: 'USD',
 		}).format(numericPrice)
 	}
+
+	console.log(data)
 
 	return (
 		<div className='product container'>
