@@ -21,22 +21,21 @@ const cartSlice = createSlice({
 		},
 
 		removeFromCart: (state, { payload }) => {
-			const updatedCart = state.filter(item => item._id !== payload)
-
-			localStorage.setItem('cart', JSON.stringify(updatedCart))
-			return updatedCart
+			state.value = state.value.filter(item => item.id !== payload)
+			localStorage.setItem('cart', JSON.stringify(state.value))
 		},
 
 		decrementCart: (state, { payload }) => {
-			const index = state.findIndex(item => item._id === payload._id)
+			const index = state.value.findIndex(item => item._id === payload._id)
 
-			if (index >= 0 && state[index].quantity > 1) {
-				state[index].quantity -= 1
+			if (index >= 0 && state.value[index].quantity > 1) {
+				state.value[index].quantity -= 1
 			} else if (index >= 0) {
-				state.splice(index, 1)
+				state.value.splice(index, 1)
 			}
 
-			localStorage.setItem('cart', JSON.stringify(state))
+			// Update local storage
+			localStorage.setItem('cart', JSON.stringify(state.value))
 		},
 	},
 })
