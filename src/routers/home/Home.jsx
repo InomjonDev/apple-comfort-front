@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Catalog, ProductWrapper } from '../../components/'
 import useGetProducts from '../../hooks/useGetProducts'
+import { scrollToTop } from '../../utils/scrollToTop'
 
 function Home() {
 	const { data, loading, error } = useGetProducts()
@@ -11,6 +12,10 @@ function Home() {
 			prevCategory === category ? 'all' : category
 		)
 	}
+
+	useEffect(() => {
+		scrollToTop()
+	}, [])
 
 	return (
 		<div>

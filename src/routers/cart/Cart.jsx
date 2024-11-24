@@ -1,14 +1,20 @@
 import { Minus, Plus, Trash } from 'lucide-react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import CartImg from '../../assets/empty/cart.png'
 import { Empty } from '../../components/'
 import { useActions } from '../../hooks/useActions'
 import { formatPrice } from '../../utils/products.utils'
+import { scrollToTop } from '../../utils/scrollToTop'
 import './Cart.css'
 
 const Cart = () => {
 	const cart = useSelector(state => state.cart.value)
 	const { addToCart, decrementCart, removeFromCart } = useActions()
+
+	useEffect(() => {
+		scrollToTop()
+	}, [])
 
 	return (
 		<div className='cart container'>

@@ -18,8 +18,6 @@ function Product({ data, loading, error }) {
 		}).format(numericPrice)
 	}
 
-	console.log(data)
-
 	return (
 		<div className='product container'>
 			<div className='product__wrapper'>

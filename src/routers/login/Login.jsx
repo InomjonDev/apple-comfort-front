@@ -3,6 +3,7 @@ import { LucideHome } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase/'
+import { scrollToTop } from '../../utils/scrollToTop'
 import { setItem } from '../../utils/store.utils'
 import './Login.css'
 
@@ -38,6 +39,10 @@ function Login() {
 			setLoading(false)
 		}
 	}
+
+	useEffect(() => {
+		scrollToTop()
+	}, [])
 
 	return (
 		<div className='login'>

@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom'
 
+import { useEffect } from 'react'
+import { scrollToTop } from '../../utils/scrollToTop'
 import './NotFound.css'
 
 function NotFound() {
+	useEffect(() => {
+		scrollToTop()
+	}, [])
+
 	return (
 		<div className='not-found-container'>
 			<h1 className='not-found-title'>404</h1>

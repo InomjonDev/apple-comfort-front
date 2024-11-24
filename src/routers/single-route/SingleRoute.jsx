@@ -4,10 +4,11 @@ import {
 	LucideArrowRight,
 	ShoppingCart,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useActions } from '../../hooks/useActions'
+import { scrollToTop } from '../../utils/scrollToTop'
 import {
 	handleNextImage,
 	handlePreviousImage,
@@ -33,6 +34,10 @@ function SingleRoute() {
 			handlePreviousImage(prevIndex, item.imageUrls.length)
 		)
 	}
+
+	useEffect(() => {
+		scrollToTop()
+	}, [])
 
 	return (
 		<div className='single-route container'>

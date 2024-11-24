@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { scrollToTop } from '../../utils/scrollToTop'
 import { uploadImagesAndCreateProduct } from '../../utils/upload-image.utils'
 import AdminSidebar from './admin-sidebar/AdminSidebar'
 import './Admin.css'
@@ -47,6 +48,10 @@ function Admin() {
 			setLoading(false)
 		}
 	}
+
+	useEffect(() => {
+		scrollToTop()
+	}, [])
 
 	return (
 		<div className='admin-wrapper'>
