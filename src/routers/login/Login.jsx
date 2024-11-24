@@ -1,43 +1,18 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { LucideHome } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { auth } from '../../firebase/'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { loginInitialState } from '../../constants/formStates'
+import { useAuth } from '../../hooks/useAuth'
 import { scrollToTop } from '../../utils/scrollToTop'
-import { setItem } from '../../utils/store.utils'
 import './Login.css'
 
-const initialState = {
-	email: '',
-	password: '',
-}
-
 function Login() {
-	const [value, setValue] = useState(initialState)
-	const [loading, setLoading] = useState(false)
-	const navigate = useNavigate()
+	const [value, setValue] = useState(loginInitialState)
+	const { login, loading } = useAuth()
 
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, currentUser => {
-			if (currentUser) {
-				setItem('user', currentUser)
-				navigate('/admin')
-			}
-		})
-
-		return () => unsubscribe()
-	}, [navigate])
-
-	const login = async e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
-		setLoading(true)
-		try {
-			await signInWithEmailAndPassword(auth, value.email, value.password)
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setLoading(false)
-		}
+		await login(value.email, value.password)
 	}
 
 	useEffect(() => {
@@ -46,10 +21,10 @@ function Login() {
 
 	return (
 		<div className='login'>
-			<Link to={'/'} className='login__link'>
+			<Link to='/' className='login__link'>
 				<LucideHome /> Home
 			</Link>
-			<form className='form' onSubmit={login}>
+			<form className='form' onSubmit={handleSubmit}>
 				<input
 					type='email'
 					placeholder='Email'
